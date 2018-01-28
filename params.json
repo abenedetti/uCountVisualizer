@@ -1,6 +1,0 @@
-{
-  "name": "uCount Visualizer",
-  "tagline": "enjoy uCount's collected data!",
-  "body": "### Next generation uCount:\r\n*uCount Visualizer* renews *uCount* with a breath of freshness: with this release, data examination was made more easy and charts section was improved with additional plots. Moreover moving the project in [R](https://www.r-project.org) under [shiny apps](https://www.shinyapps.io) framework, gave it a readiness for further improvements.\r\n\r\nuCount Visualizer is available [here](https://abenedetti.shinyapps.io/uCountVisualizer/).",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
