@@ -7,9 +7,10 @@
 #load libraries
 library(shiny)
 library(shinyjs)
-library(markdown)
+library(rmarkdown)
+library(shinythemes)
 
-shinyUI(fluidPage(theme = "darkly.css",
+shinyUI(fluidPage(theme = shinytheme("flatly"),
  
  #load google analytics
  tags$head(includeScript("www/google-analytics-uCountVis.js")),
@@ -30,11 +31,11 @@ shinyUI(fluidPage(theme = "darkly.css",
      wellPanel(
       fluidRow(
        #[begin fix 1.5]
-       column(1, offset=1, selectInput("idYearD", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', seq(2016,as.numeric(format(Sys.Date(),"%Y")),1)))),
+       column(1, offset=1, selectInput("idYearD", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', c("2016","2017","2018")))),
        #[end fix 1.5]
        column(2, selectInput("idMonthD", "", selected=NULL, multiple=FALSE, choice=c('Month' = '', c("January","February","March","April","May","June","July","August","September","October","November","December")))),
        column(1, selectInput("idWeekD", "", selected=NULL, multiple=FALSE, choice=c('Week' = '', seq(1,52)))),
-       column(3, dateRangeInput('idRangeD', label = "", start = "2016-03-12", end = Sys.Date(), separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
+       column(3, dateRangeInput('idRangeD', label = "", start = "2016-03-12", end = "2018-12-31", separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
        tags$head(tags$style(HTML('#idResD{background-color:red; margin-top: 16px;}'))),
        column(1, offset=1, align="center", actionButton("idResD", "Reset filters")),
        tags$head(tags$style(HTML('#idDwn{background-color:blue; margin-top: 16px;}'))),
@@ -59,7 +60,7 @@ shinyUI(fluidPage(theme = "darkly.css",
      hr(),
      
      fluidRow(
-      column(12, dataTableOutput('dataTable'))
+      column(12, DT::dataTableOutput('dataTable'))
      )
      
     ),                                              
@@ -78,11 +79,11 @@ shinyUI(fluidPage(theme = "darkly.css",
          h4("Chart 1: Mean variation and max/min delta per day"),
          fluidRow(
           #[begin fix 1.5]
-          column(1, selectInput("idYearC1", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', seq(2016,as.numeric(format(Sys.Date(),"%Y")),1)))),
+          column(1, selectInput("idYearC1", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', c("2016","2017","2018")))),
           #[end fix 1.5]
           column(2, selectInput("idMonthC1", "", selected=NULL, multiple=FALSE, choice=c('Month' = '', c("January","February","March","April","May","June","July","August","September","October","November","December")))),
           column(1, selectInput("idWeekC1", "", selected=NULL, multiple=FALSE, choice=c('Week' = '', seq(1,52)))),
-          column(2, offset = 1, dateRangeInput('idRangeC1', label = "", start = "2016-03-12", end = Sys.Date(), separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
+          column(2, offset = 1, dateRangeInput('idRangeC1', label = "", start = "2016-03-12", end = "2018-12-31", separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
           tags$head(tags$style(HTML('#idResC1{background-color:red; margin-top: 16px;}'))),
           column(1, offset = 1, align="center", actionButton("idResC1", "Reset Chart 1")),
           br()
@@ -96,11 +97,11 @@ shinyUI(fluidPage(theme = "darkly.css",
          h4("Chart 2: Mean per day"),
          fluidRow(
           #[begin fix 1.5]
-          column(1, selectInput("idYearC2", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', seq(2016,as.numeric(format(Sys.Date(),"%Y")),1)))),
+          column(1, selectInput("idYearC2", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', c("2016","2017","2018")))),
           #[end fix 1.5]
           column(2, selectInput("idMonthC2", "", selected=NULL, multiple=FALSE, choice=c('Month' = '', c("January","February","March","April","May","June","July","August","September","October","November","December")))),
           column(1, selectInput("idWeekC2", "", selected=NULL, multiple=FALSE, choice=c('Week' = '', seq(1,52)))),
-          column(2, offset = 1, dateRangeInput('idRangeC2', label = "", start = "2016-03-12", end = Sys.Date(), separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
+          column(2, offset = 1, dateRangeInput('idRangeC2', label = "", start = "2016-03-12", end = "2018-12-31", separator = " - ", format = "yyyy-mm-dd", weekstart = 1)),
           tags$head(tags$style(HTML('#idResC2{background-color:red; margin-top: 16px;}'))),
           column(1, offset = 1, align="center", actionButton("idResC2", "Reset Chart 2")),
           br()
@@ -177,7 +178,7 @@ shinyUI(fluidPage(theme = "darkly.css",
          ),
          fluidRow(
           #[begin fix 1.5]
-          column(1, selectInput("idYearC5", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', seq(2016,as.numeric(format(Sys.Date(),"%Y")),1)))),
+          column(1, selectInput("idYearC5", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', c("2016","2017","2018")))),
           #[end fix 1.5]
           column(2, selectInput("idMonthC5", "", selected=NULL, multiple=FALSE, choice=c('Month' = '', c("January","February","March","April","May","June","July","August","September","October","November","December")))),
           tags$head(tags$style(HTML('#idResC5{background-color:red; margin-top: 15px;}'))),
@@ -199,7 +200,7 @@ shinyUI(fluidPage(theme = "darkly.css",
          ),
          fluidRow(
           #[begin fix 1.5]
-          column(1, selectInput("idYearC6", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', seq(2016,as.numeric(format(Sys.Date(),"%Y")),1)))),
+          column(1, selectInput("idYearC6", "", selected=NULL, multiple=FALSE, choice=c('Year' = '', c("2016","2017","2018")))),
           #[end fix 1.5]
           tags$head(tags$style(HTML('#idResC6{background-color:red; margin-top: 15px;}'))),
           column(1, offset=1, align="center", actionButton("idResC6", "Reset Chart 6")),

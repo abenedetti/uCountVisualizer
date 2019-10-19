@@ -10,6 +10,7 @@ library(gsheet)
 library(googleVis)
 library(rCharts)
 library(reshape2)
+library(DT)
 
 #set locale for filters
 Sys.setlocale("LC_TIME", "C")
@@ -20,36 +21,43 @@ dataRaw <- gsheet2tbl(url)
 
 #clean raw data
 #skip first 4 rows
-dataRaw <- tail(dataRaw,-4)
+dataRaw <- as.data.frame(tail(dataRaw, -4))
+
+#rename data columns
+colnames(dataRaw)[1] <- "FullDate"
+colnames(dataRaw)[2] <- "University"
+colnames(dataRaw)[3] <- "Projects"
+colnames(dataRaw)[4] <- "Events"
+colnames(dataRaw)[5] <- "Tools"
+colnames(dataRaw)[6] <- "Community"
+colnames(dataRaw)[7] <- "Platform"
+colnames(dataRaw)[8] <- "Mean"
+colnames(dataRaw)[9] <- "Variation"
+colnames(dataRaw)[10] <- "Variation %"
+colnames(dataRaw)[11] <- "Max/Min delta"
+
 #substitute comma with decimal point in the column number ten
-#[begin fix 1.8]
-dataRaw$X10 <- gsub(',', '.', dataRaw$X10)
-#[end fix 1.8]
+dataRaw$`Variation %` <- gsub(',', '.', dataRaw$`Variation %`)
+
 #format date field
-dataClean <- as.Date(dataRaw$X1,"%d/%m/%Y %H:%M:%S")
-#set the appropriate data types
-dataClean <- as.data.frame(dataClean)
+dataRaw$Date <- as.Date(dataRaw$FullDate,"%d/%m/%Y")
+
 #data bind 
-dataClean <- cbind (
-  dataClean,
-  #[begin fix 1.5]
-  as.numeric(format(dataClean$dataClean,"%U")),
-  #Reference: https://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html
-  #Week of the year as decimal number (01-53) as defined in ISO 8601. If the week (starting on Monday) containing 1 January has four or more days in the new year, then it is considered week 1. Otherwise, it is the last week of the previous year, and the next week is week 1. 
-  #[end fix 1.5]
-  #[begin fix 1.8]
-  #as.numeric(dataRaw$X1),
-  #[end fix 1.8]
-  as.numeric(dataRaw$X2),
-  as.numeric(dataRaw$X3),
-  as.numeric(dataRaw$X4),
-  as.numeric(dataRaw$X5),
-  as.numeric(dataRaw$X6),
-  as.numeric(dataRaw$X7),
-  as.numeric(dataRaw$X8),
-  as.numeric(dataRaw$X9),
-  as.numeric(dataRaw$X10),
-  as.numeric(dataRaw$X11)
+dataClean <- data.frame (
+   dataRaw$Date,  
+   as.numeric(dataRaw$FullDate,"%U"),
+   #Reference: https://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html
+   #Week of the year as decimal number (01-53) as defined in ISO 8601. If the week (starting on Monday) containing 1 January has four or more days in the new year, then it is considered week 1. Otherwise, it is the last week of the previous year, and the next week is week 1.   
+   as.numeric(dataRaw$University),
+   as.numeric(dataRaw$Projects),
+   as.numeric(dataRaw$Events),
+   as.numeric(dataRaw$Tools),
+   as.numeric(dataRaw$Community),
+   as.numeric(dataRaw$Platform),
+   as.numeric(dataRaw$Mean),
+   as.numeric(dataRaw$Variation),
+   as.numeric(dataRaw$`Variation %`),
+   as.numeric(dataRaw$`Max/Min delta`)
 )
 
 #rename data columns
@@ -103,11 +111,11 @@ shinyServer(function(input, output) {
     else {dataClean[dataClean$Date >= input$idRangeD[1] & dataClean$Date <= input$idRangeD[2],]}
    )
    
-   output$dataTable <- renderDataTable(
+   output$dataTable <- DT::renderDataTable(
     datasetInputFilters(),
     options = list(order = list(list(0, 'desc')), pageLength = 10, searching = FALSE, dom = 'ltip')
    )
-  
+   
    #variation
    datasetInputSumVarN <- reactive(
     if (input$idYearD != '' & input$idMonthD == '' & input$idWeekD == '') {dataClean[format(dataClean$Date,"%Y") == input$idYearD & dataClean$Date >= input$idRangeD[1] & dataClean$Date <= input$idRangeD[2], c(10)]}

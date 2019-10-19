@@ -34,7 +34,7 @@ The data is refreshed on each load (keep in mind that uCount retrieves data on d
 <br>
 <ul>
  <li type="square">"Visualizer charts" tab: these are the new charts created on purpose for uCount Visualizer</li>
- <li type="square">"Katung's charts" tab: these are "baptized" after Robin Khun. Robin, better known among uTesters as <a href="https://www.utest.com/profile/Katung/about" target="_blank">@Katung</a>, is a member of the uTest Community. She is a very active user and entitled as a uTest forum moderator. To thank for her interest in uCount, as well as the analysis she did, I decided to include a couple of plot she made, obviously named after their authoress. Thanks again Robin! :) [<i>On the 25th of february 2017 Robin left the community to concentrate on new projects! :( here some <a href="https://www.utest.com/status/33486" target="_blank">farewell posts</i></a>]</li> 
+ <li type="square">"Katung's charts" tab: these are "baptized" after Robin Khun. Robin, better known among uTesters as <a href="https://www.utest.com/forums/15792/page/1" target="_blank">@Katung</a>, is a member of the uTest Community. She is a very active user and entitled as a uTest forum moderator. To thank for her interest in uCount, as well as the analysis she did, I decided to include a couple of plot she made, obviously named after their authoress. Thanks again Robin! :) [<i>On the 25th of february 2017 Robin left the community to concentrate on new projects! :( here some <a href="https://www.utest.com/status/33486" target="_blank">farewell posts</i></a>]</li> 
  <li type="square">"uCount's charts" tab: these charts have a "legacy flavor" since the plot displayed are those that were initially made on uCount</li>
 </ul>
 </p2>
@@ -153,8 +153,25 @@ A few months later I started to think on how to integrate additional charts and 
  <li type="square">released the 2017 yearly report (help tab updated accordingly)</li> 
 </ul></p2>
 <br>
+<p2>
+14th of october 2019&nbsp;&nbsp;
+<b>version:</b> 2.0
+<ul style="padding-left:5em">
+ <li type="square">migrated back on shinyapps.io</li>
+ <li type="square">updated the table rendering by using the DT package</li>
+ <li type="square">shifted to the <i>flatly</i> theme</li>
+ <li type="square">updated the year sequences to stop at 2018</li> 
+</ul></p2>
+<br>
+<p2>
+19th of october 2019&nbsp;&nbsp;
+<b>version:</b> 2.1
+<ul style="padding-left:5em">
+ <li type="square">redesign of the data load for shinyapps.io compatibility</li> 
+</ul></p2>
+<br>
  [//]: # (begin fix 1.1)
- <p2>For those of you curious about coding, you may have a look at the github repositories of <a href="https://github.com/abenedetti/uCount" target="_blank">uCount</a> and <a href="https://github.com/abenedetti/uCountVisualizer/tree/master" target="_blank">uCount Visualizer</a>.</p2>
+ <p2>For those of you curious about coding, you may have a look at the github repositories of <a href="https://github.com/abenedetti/uCount" target="_blank">uCount</a> and <a href="https://github.com/abenedetti/uCountVisualizer/" target="_blank">uCount Visualizer</a>.</p2>
  [//]: # (end fix 1.1)
 
 <br>
