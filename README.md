@@ -1,7 +1,7 @@
 # uCountVisualizer
 uCount Visualizer renews uCount with a breath of freshness: data examination has been made more easy and charts section was improved with additional plots. Moreover moving the project in [R](https://www.r-project.org) under [shiny apps](https://www.shinyapps.io) framework, gave it a readiness for further improvements.
 
-uCount Visualizer is available [here](http://apps.alessiobenedetti.com/shiny/uCountVis).
+uCount Visualizer is available [here](https://abenedetti.shinyapps.io/uCountVisualizer/).
 
 ![background](code/uCountVis_bckgd.png)
 
